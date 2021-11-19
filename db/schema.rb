@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_11_19_214853) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.string "short_description"
     t.string "image_url"
     t.datetime "create_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "updated_at"
@@ -37,6 +38,8 @@ ActiveRecord::Schema.define(version: 2021_11_19_214853) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
+    t.string "normalized_email"
+    t.string "normalized_username"
     t.string "password"
     t.string "firstname"
     t.string "lastname"

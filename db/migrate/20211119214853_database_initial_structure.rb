@@ -3,6 +3,8 @@ class DatabaseInitialStructure < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :username
       t.string :email
+      t.string :normalized_email
+      t.string :normalized_username
       t.string :password
       t.string :firstname
       t.string :lastname
@@ -14,6 +16,7 @@ class DatabaseInitialStructure < ActiveRecord::Migration[6.1]
     create_table :posts do |t|
       t.string :title
       t.string :description
+      t.string :short_description
       t.string :image_url
       t.timestamp :create_at, default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamp :updated_at, null: true
