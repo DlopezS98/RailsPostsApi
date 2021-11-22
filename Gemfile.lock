@@ -78,6 +78,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    jwt (2.3.0)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -152,9 +153,11 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt
   bootsnap (>= 1.4.4)
   byebug
   devise
+  jwt
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.1)
