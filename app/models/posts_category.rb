@@ -1,0 +1,3 @@
+class PostsCategory < ApplicationRecord
+    
+end
