@@ -1,4 +1,4 @@
-class V1::AuthController < ApplicationController
+class Api::V1::AuthController < ApplicationController
     skip_before_action :process_token, only: [:sign_in, :sign_up]
 
     def index
