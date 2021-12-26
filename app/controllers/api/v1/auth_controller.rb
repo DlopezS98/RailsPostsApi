@@ -8,24 +8,19 @@ class Api::V1::AuthController < ApplicationController
 
     def sign_in
         user = User.where(email: params[:email]).first
-        if user
-            valid_password = user.valid_password?(params[:password])
-            if valid_password
-                token = Security::JsonWebToken.encode(get_token_payload(user))
-                render json: HttpResponse.new.success("You're logged in successfully!", { token: token }) , status: :ok
-            else
-                render json: HttpResponse.new.error("The password is wrong!", 400), status: :bad_request
-            end
-        else
-            render json: HttpResponse.new.error("The email is wrong or doesn't exists!", 400), status: :bad_request
-        end
+        raise HttpStandardError.new(message: "The email is wrong or doesn't exists!") unless user
+        valid_password = user.valid_password?(params[:password])
+
+        raise HttpStandardError.new(message: "The password is wrong!") unless valid_password
+        token = Security::JsonWebToken.encode(get_token_payload(user))
+        render json: HttpResponse.new.success(message: "You're logged in successfully!", data: { token: token }) , status: :ok
     end
 
     def sign_up
         user_params = params.require(:user).permit(:email, :username, :firstname, :lastname, :password)
         user = User.new(user_params)
         user.commit_user
-        render json: HttpResponse.new.success("Sign up successfully!"), status: :ok
+        render json: HttpResponse.new.success(message: "Sign up successfully!"), status: :ok
     end
 
     private 
