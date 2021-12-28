@@ -1,3 +1,4 @@
 namespace :posts do
-    get '', to: 'posts#index'
+    get '', action: :index
+    post '', action: :new
 end
